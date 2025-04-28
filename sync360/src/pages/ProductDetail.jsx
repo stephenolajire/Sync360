@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { MdArrowBack, MdShoppingCart, MdAdd, MdRemove } from 'react-icons/md';
 import styles from './css/ProductDetail.module.css';
 import {useLocation} from 'react-router-dom'
+import { sampleProducts } from '../data/sampledata';
 
 // Sample product data with updated image URLs
 const ProductDetail = () => {
@@ -15,19 +16,30 @@ const ProductDetail = () => {
   const { productId } = useParams();
   const { state } = useLocation();
 //   const [product, setProduct] = useState(null);
-
     useEffect(() => {
     if (state && state.product) {
         setProduct(state.product);
+        setLoading(false); // Add this line
     } else {
         // Fallback to looking in local sample data
         const foundProduct = sampleProducts.find(p => p.id === parseInt(productId));
         if (foundProduct) {
         setProduct(foundProduct);
         }
+        setLoading(false); // Add this line too
     }
     }, [productId, state]);
-  
+
+    const handleQuantityChange = (change) => {
+  setQuantity(prev => Math.max(1, prev + change));
+};
+
+// Add this function to handle adding to cart
+const addToCart = () => {
+  // Here you would typically dispatch to a cart context or state manager
+  // For now, we'll just show an alert
+  alert(`Added ${quantity} ${product.name} to cart`);
+};
   if (loading) {
     return (
       <div className={styles.loadingContainer}>

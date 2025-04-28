@@ -210,7 +210,7 @@
 }
 
 .addButton {
-  padding: 1.5rem 3rem;
+  padding: 1rem;
   border-radius: 0.8rem;
   display: flex;
   align-items: center;
@@ -318,7 +318,7 @@
 
 @media (max-width: 768px) {
   .productTitle {
-    font-size: var(--header-three-mobile);
+    font-size: var(--header-four-mobile);
   }
   
   .productPrice {
@@ -339,5 +339,10 @@
   .addButton {
     width: 100%;
     font-size: var(--button-text-mobile);
+  }
+
+  .productHeader {
+    display: flex;
+    flex-direction:column;
   }
 }
