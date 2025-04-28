@@ -204,4 +204,9 @@
   .optionDescription {
     font-size: var(--subtext-mobile) !important;
   }
+
+  .popup{
+    height:95%;
+    overflow-y:auto;
+  }
 }

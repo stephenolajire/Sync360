@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { MdCheckCircle, MdClose, MdCamera } from "react-icons/md";
 import styles from "./css/ScanMode.module.css";
+import Camera from "../components/Camera";
 
 const ScanMode = ({ isOpen, onClose, productName, productPrice }) => {
   const [visible, setVisible] = useState(false);
   const [animation, setAnimation] = useState("");
   const [cameraActive, setCameraActive] = useState(false);
   const [scanning, setScanning] = useState(false);
-  const videoRef = useRef(null);
-  const canvasRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -26,79 +25,41 @@ const ScanMode = ({ isOpen, onClose, productName, productPrice }) => {
     }, 300);
   };
 
-  const startCamera = async () => {
-    try {
-      const constraints = {
-        video: { facingMode: "environment" }, // Use the back camera if available
-      };
-
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        videoRef.current.onloadedmetadata = () => {
-          videoRef.current.play();
-          setCameraActive(true);
-          setScanning(true);
-        };
-      }
-    } catch (err) {
-      console.error("Error accessing camera:", err);
-      alert(
-        "Unable to access camera. Please make sure you've granted camera permissions."
-      );
-    }
+  const startCamera = () => {
+    setCameraActive(true);
+    setScanning(true);
   };
 
   const stopCamera = () => {
-    if (videoRef.current && videoRef.current.srcObject) {
-      const tracks = videoRef.current.srcObject.getTracks();
-      tracks.forEach((track) => track.stop());
-      videoRef.current.srcObject = null;
-      setCameraActive(false);
-      setScanning(false);
-    }
+    setCameraActive(false);
+    setScanning(false);
   };
 
-  // This would be where you'd implement your actual barcode scanning logic
-  const scanBarcode = () => {
-    if (!scanning || !canvasRef.current || !videoRef.current) return;
-
-    const canvas = canvasRef.current;
-    const context = canvas.getContext("2d");
-
-    // Match canvas size to video
-    canvas.width = videoRef.current.videoWidth;
-    canvas.height = videoRef.current.videoHeight;
-
-    // Draw the current video frame to the canvas
-    context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-
-    // Here you would add your barcode detection logic
-    // For example, with a library like quagga.js, zbar.wasm, etc.
-
-    // For this example, we'll just simulate a successful scan after a few seconds
-    // In a real app, you'd replace this with actual barcode detection
-    setTimeout(() => {
-      if (scanning) {
-        stopCamera();
-        // Simulate finding a product
-        onClose();
-      }
-    }, 3000);
+  // This function would be passed to the Camera component to handle successful scans
+  const handleBarcodeScan = (barcodeData) => {
+    console.log("Barcode scanned:", barcodeData);
+    stopCamera();
+    // In a real app, you would use the barcode data to fetch product information
+    // For this example, we'll just simulate a successful scan
+    onClose();
   };
 
+  // Simulating a successful scan after a few seconds (for demo purposes)
   useEffect(() => {
-    // Set up a scanning interval when the camera is active
-    let scanInterval;
+    let scanTimer;
     if (scanning) {
-      scanInterval = setInterval(scanBarcode, 500); // Check for barcodes every 500ms
+      scanTimer = setTimeout(() => {
+        if (scanning) {
+          stopCamera();
+          onClose();
+        }
+      }, 10000);
     }
 
     return () => {
-      if (scanInterval) clearInterval(scanInterval);
+      if (scanTimer) clearTimeout(scanTimer);
     };
-  }, [scanning]);
+  }, [scanning, onClose]);
 
   if (!visible) return null;
 
@@ -146,21 +107,21 @@ const ScanMode = ({ isOpen, onClose, productName, productPrice }) => {
 
             <div className={styles.cameraContainer}>
               {cameraActive ? (
-                <>
-                  <video
-                    ref={videoRef}
-                    className={styles.cameraView}
-                    playsInline
-                  />
-                  <canvas ref={canvasRef} className={styles.hiddenCanvas} />
-                  <div className={styles.scanOverlay}>
-                    <div className={styles.scanLine}></div>
-                  </div>
-                </>
+                <Camera 
+                  onScan={handleBarcodeScan} 
+                  onError={(error) => console.error("Camera error:", error)}
+                  className={styles.cameraView}
+                />
               ) : (
                 <div className={styles.cameraPlaceholder}>
                   <MdCamera className={styles.cameraIcon} />
                   <p>Camera access required</p>
+                </div>
+              )}
+              
+              {cameraActive && (
+                <div className={styles.scanOverlay}>
+                  <div className={styles.scanLine}></div>
                 </div>
               )}
             </div>
