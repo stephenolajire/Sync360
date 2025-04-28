@@ -1,0 +1,146 @@
+/* Footer.module.css */
+.footer {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  padding: 5rem 2rem 2rem 5rem;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 3rem;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.section h3 {
+  color: var(--secondary-color);
+  margin-bottom: 1.5rem;
+  font-size: var(--header-three);
+}
+
+.section h4 {
+  color: var(--secondary-color-2);
+  margin-bottom: 1.5rem;
+  font-size: var(--header-five);
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.section h4::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 50px;
+  background-color: var(--secondary-color);
+}
+
+.section p {
+  color: var(--foreground-color);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.section li {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.section a {
+  color: var(--secondary-color-4);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: var(--subtext);
+}
+
+.section a:hover {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+.contactIcon {
+  margin-right: 1rem;
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+}
+
+.section li span:last-child {
+  color: var(--foreground-color);
+  font-size: var(--subtext);
+}
+
+.social {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.social a {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--secondary-color-3);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social a:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  transform: translateY(-3px);
+}
+
+.bottom {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.subtext {
+  color: var(--grey-4);
+  font-size: var(--subtext);
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  
+  .section h3 {
+    font-size: var(--header-three-mobile);
+  }
+  
+  .section h4 {
+    font-size: var(--header-five-mobile);
+  }
+  
+  .section a, .section li span:last-child {
+    font-size: var(--subtext-mobile);
+  }
+  
+  .social {
+    justify-content: center;
+  }
+  
+  .subtext {
+    font-size: var(--subtext-mobile);
+  }
+}

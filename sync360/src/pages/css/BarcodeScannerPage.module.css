@@ -1,0 +1,143 @@
+/* BarcodeScannerPage.module.css */
+.scannerPage {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.scannerHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.scannerHeader h1 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.scannerHeader p {
+  color: var(--text-body);
+  font-size: var(--body-text);
+}
+
+.scannerContainer {
+  background-color: var(--foreground-color);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.stepNumber {
+  background-color: var(--secondary-color);
+  color: white;
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--header-five);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.step p {
+  margin: 0;
+  font-size: var(--body-text);
+  color: var(--text-body);
+}
+
+.scanButton, .demoButton {
+  padding: 1.4rem 4rem;
+  border-radius: 10px;
+  border: none;
+  font-size: var(--body-text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanButton {
+  background-color: var(--secondary-color);
+  color: white;
+  width: 100%;
+  max-width: 300px;
+}
+
+.scanButton:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(82, 182, 97, 0.2);
+}
+
+.demoButton {
+  background-color: var(--foreground-color);
+  color: var(--text-body);
+  border: 1px dashed var(--grey-4);
+  font-size: var(--subtext);
+}
+
+.demoButton:hover {
+  background-color: var(--secondary-color-6);
+  border-color: var(--secondary-color-3);
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .scannerPage {
+    padding: 1.5rem 1rem;
+  }
+  
+  .scannerHeader h1 {
+    font-size: var(--header-two-mobile);
+  }
+  
+  .scannerHeader p {
+    font-size: var(--body-text-mobile);
+  }
+  
+  .scannerContainer {
+    padding: 2rem 1.5rem;
+  }
+  
+  .step p {
+    font-size: var(--body-text-mobile);
+  }
+  
+  .stepNumber {
+    width: 3rem;
+    height: 3rem;
+    font-size: var(--header-six-mobile);
+  }
+  
+  .scanButton {
+    padding: 1.2rem 3rem;
+    font-size: var(--body-text-mobile);
+  }
+  
+  .demoButton {
+    font-size: var(--subtext-mobile);
+  }
+}

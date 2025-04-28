@@ -1,0 +1,207 @@
+/* ShoppingModePopup.module.css */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(13, 38, 28, 0.85); /* var(--primary-color) with opacity */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.popup {
+  background-color: var(--background-color);
+  width: 90%;
+  max-width: 800px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  animation: scaleIn 0.4s ease-out;
+}
+
+.popupContent {
+  padding: 3.5rem;
+  text-align: center;
+}
+
+.popup h2 {
+  color: var(--primary-color);
+  font-size: var(--header-two);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.popup p {
+  color: var(--text-body);
+  font-size: var(--body-text);
+  margin-bottom: 3rem;
+}
+
+.optionsContainer {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.optionButton {
+  flex: 1;
+  min-width: 240px;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--foreground-color);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.optionButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--secondary-color), var(--secondary-color-2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.optionButton:hover::before {
+  transform: scaleX(1);
+}
+
+.inStoreButton:hover {
+  background-color: var(--foreground-color);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(82, 182, 97, 0.15);
+}
+
+.deliveryButton:hover {
+  background-color: var(--foreground-color);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(197, 206, 76, 0.15);
+}
+
+.iconWrapper {
+  background-color: rgba(82, 182, 97, 0.1);
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.inStoreButton:hover .iconWrapper {
+  background-color: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+.deliveryButton .iconWrapper {
+  background-color: rgba(197, 206, 76, 0.1);
+}
+
+.deliveryButton:hover .iconWrapper {
+  background-color: var(--secondary-color-2);
+  transform: scale(1.05);
+}
+
+.optionIcon {
+  font-size: 3.5rem;
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.inStoreButton:hover .optionIcon,
+.deliveryButton:hover .optionIcon {
+  color: var(--primary-color);
+}
+
+.optionButton span {
+  font-size: var(--header-five);
+  font-weight: 500;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.optionDescription {
+  font-size: var(--subtext) !important;
+  color: var(--text-body) !important;
+  margin-bottom: 0 !important;
+  margin-top: 0.5rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { 
+    transform: scale(0.9);
+    opacity: 0; 
+  }
+  to { 
+    transform: scale(1);
+    opacity: 1; 
+  }
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .popupContent {
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .popup h2 {
+    font-size: var(--header-two-mobile);
+  }
+  
+  .popup p {
+    font-size: var(--body-text-mobile);
+    margin-bottom: 2rem;
+  }
+  
+  .optionsContainer {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .optionButton {
+    width: 100%;
+    padding: 2rem 1.5rem;
+  }
+  
+  .iconWrapper {
+    width: 6rem;
+    height: 6rem;
+  }
+  
+  .optionIcon {
+    font-size: 2.8rem;
+  }
+  
+  .optionButton span {
+    font-size: var(--header-five-mobile);
+  }
+  
+  .optionDescription {
+    font-size: var(--subtext-mobile) !important;
+  }
+}
