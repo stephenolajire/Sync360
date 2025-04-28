@@ -59,7 +59,7 @@ function App() {
                 path="products"
                 element={<ProductPage/>}
               />
-              <Route path="scan" element={<div>Barcode Scanner Page</div>} />
+              <Route path="scan" element={<BarcodeScannerPage/>} />
               <Route path="product/:id" element={<ProductDetail/>} />
             </Route>
           </Routes>
