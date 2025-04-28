@@ -1,0 +1,343 @@
+/* ProductDetail.module.css */
+.container {
+  min-height: 100vh;
+  background-color: var(--background-color);
+}
+
+.header {
+  background-color: white;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.headerContent {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.backButton {
+  margin-right: 2rem;
+  padding: 1rem;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: var(--foreground-color);
+}
+
+.backIcon {
+  font-size: 2.4rem;
+  color: var(--primary-color);
+}
+
+.headerTitle {
+  font-size: var(--header-five);
+  font-weight: 500;
+  color: var(--text-title);
+}
+
+.mainContent {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.productCard {
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.1);
+}
+
+.imageContainer {
+  position: relative;
+}
+
+.productImage {
+  width: 100%;
+  object-fit: cover;
+  height: 35rem;
+}
+
+.stockBadge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.inStock {
+  background-color: var(--success-1);
+}
+
+.outOfStock {
+  background-color: var(--error-1);
+}
+
+.productInfo {
+  padding: 2rem;
+}
+
+.productHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.productTitle {
+  font-size: var(--header-three);
+  font-weight: bold;
+  color: var(--text-title);
+  margin-bottom: 0.5rem;
+}
+
+.productCategory {
+  font-size: var(--subtext);
+  color: var(--grey-3);
+}
+
+.productPrice {
+  font-size: var(--header-four);
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.sectionTitle {
+  font-size: var(--header-five);
+  font-weight: 600;
+  color: var(--text-title);
+  margin-bottom: 1.2rem;
+  margin-top: 3rem;
+}
+
+.descriptionText {
+  font-size: var(--body-text);
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+.featuresList {
+  list-style-type: disc;
+  padding-left: 2.5rem;
+  font-size: var(--body-text);
+  color: var(--text-body);
+}
+
+.featureItem {
+  margin-bottom: 0.8rem;
+  line-height: 1.6;
+}
+
+.specificationsContainer {
+  background-color: var(--foreground-color);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.specificationRow {
+  display: flex;
+  padding: 1.2rem 0;
+  border-bottom: 0.1rem solid var(--grey-5);
+}
+
+.specificationRow:last-child {
+  border-bottom: none;
+}
+
+.specificationLabel {
+  width: 33.33%;
+  font-size: var(--body-text);
+  font-weight: 500;
+  color: var(--grey-2);
+  text-transform: capitalize;
+}
+
+.specificationValue {
+  width: 66.67%;
+  font-size: var(--body-text);
+  color: var(--text-body);
+}
+
+.cartSection {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.quantitySelector {
+  display: flex;
+  align-items: center;
+  border: 0.1rem solid var(--grey-5);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  width: fit-content;
+}
+
+.quantityButton {
+  padding: 1.2rem 1.5rem;
+  background-color: transparent;
+  border: none;
+  color: var(--grey-3);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 2rem;
+}
+
+.quantityButton:hover:not(:disabled) {
+  background-color: var(--grey-6);
+}
+
+.quantityButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.quantityValue {
+  padding: 1.2rem 3rem;
+  font-size: var(--body-text);
+  color: var(--text-title);
+}
+
+.addButton {
+  padding: 1.5rem 3rem;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: var(--button-text);
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addButtonActive {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.addButtonActive:hover {
+  background-color: var(--secondary-color-1);
+}
+
+.addButtonDisabled {
+  background-color: var(--grey-5);
+  color: var(--grey-3);
+  cursor: not-allowed;
+}
+
+.cartIcon {
+  font-size: 2.2rem;
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  border-top: 0.3rem solid var(--secondary-color);
+  border-right: 0.3rem solid transparent;
+  border-bottom: 0.3rem solid var(--secondary-color);
+  border-left: 0.3rem solid transparent;
+  border-radius: 50%;
+  height: 5rem;
+  width: 5rem;
+}
+
+.notFoundContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.notFoundTitle {
+  font-size: var(--header-three);
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: var(--text-title);
+}
+
+.notFoundButton {
+  padding: 1.2rem 2.5rem;
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 0.8rem;
+  font-size: var(--button-text);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.notFoundButton:hover {
+  background-color: var(--secondary-color-1);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .cartSection {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .quantitySelector {
+    margin-bottom: 0;
+  }
+  
+  .productImage {
+    height: 48rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .productTitle {
+    font-size: var(--header-three-mobile);
+  }
+  
+  .productPrice {
+    font-size: var(--header-four-mobile);
+  }
+  
+  .sectionTitle {
+    font-size: var(--header-five-mobile);
+  }
+  
+  .descriptionText,
+  .featuresList,
+  .specificationLabel,
+  .specificationValue {
+    font-size: var(--body-text-mobile);
+  }
+  
+  .addButton {
+    width: 100%;
+    font-size: var(--button-text-mobile);
+  }
+}

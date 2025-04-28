@@ -3,6 +3,8 @@ import Layout from "./layout/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ShoppingModePopup from "./components/ShoppingModePopUp";
 import BarcodeScannerPage from "./pages/BarCodeScanner";
+import ProductPage from './pages/ProductPage'
+import ProductDetail from './pages/ProductDetail'
 
 function App() {
   const [showModal, setShowModal] = useState(true);
@@ -51,14 +53,14 @@ function App() {
               {shoppingMode === "in-store" ? (
                 <Route index element={<BarcodeScannerPage/>} />
               ) : (
-                <Route index element={<div>Product Listing Page</div>} />
+                <Route index element={<ProductPage/>} />
               )}
               <Route
                 path="products"
-                element={<div>Product Listing Page</div>}
+                element={<ProductPage/>}
               />
               <Route path="scan" element={<div>Barcode Scanner Page</div>} />
-              {/* Your other routes */}
+              <Route path="product/:id" element={<ProductDetail/>} />
             </Route>
           </Routes>
         </BrowserRouter>

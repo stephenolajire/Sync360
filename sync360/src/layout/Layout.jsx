@@ -6,7 +6,7 @@ function Layout() {
   return (
     <div>
         <Outlet/>
-        {/* <Footer/> */}
+        <Footer/>
     </div>
   )
 }
