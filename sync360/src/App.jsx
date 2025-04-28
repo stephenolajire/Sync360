@@ -23,7 +23,7 @@ function App() {
       setShowModal(true);
       setShowContent(false);
     }
-  }, []);
+  }, [!savedMode]);
 
   const handleModeSelection = (mode) => {
     setShoppingMode(mode);
