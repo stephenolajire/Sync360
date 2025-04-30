@@ -306,16 +306,16 @@
   }
   
   .productsGrid {
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    gap: 1.5rem;
   }
   
   .productImage {
-    height: 12rem;
+    height: 18rem;
   }
   
   .productName {
-    font-size: var(--header-six-mobile);
+    font-size: var(--header-five-mobile);
   }
   
   .productPrice {
@@ -328,7 +328,7 @@
   }
   
   .addToCartButton {
-    padding: 1rem;
+    padding: 1.5rem;
     font-size: var(--button-text-mobile);
     width:100%;
   }
