@@ -201,8 +201,12 @@
   }
   
   .itemImage img {
-    height: 14rem;
+    height: 18rem;
   }
+
+  /* .itemHeader h3 {
+    font-size: 1rem;
+  } */
 
   .cartName {
     display: none;

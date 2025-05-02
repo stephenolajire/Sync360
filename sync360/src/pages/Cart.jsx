@@ -9,6 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import styles from "./css/Cart.module.css";
 import { sampleProducts } from "../data/sampledata";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState(
@@ -17,7 +18,7 @@ const Cart = () => {
       cartQuantity: 1,
     }))
   );
-
+  const navigate = useNavigate();
   const updateQuantity = (id, change) => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
@@ -43,6 +44,10 @@ const Cart = () => {
       (total, item) => total + item.price * item.cartQuantity,
       0
     );
+  };
+
+  const handleCheckout = () => {
+    navigate("/checkout");
   };
 
   if (cartItems.length === 0) {
@@ -130,7 +135,7 @@ const Cart = () => {
               <span>${calculateTotal().toFixed(2)}</span>
             </div>
           </div>
-          <button className={styles.checkoutButton}>Proceed to Checkout</button>
+          <button onClick={handleCheckout} className={styles.checkoutButton}>Proceed to Checkout</button>
         </div>
       </div>
     </div>
