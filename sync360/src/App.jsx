@@ -3,8 +3,9 @@ import Layout from "./layout/Layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ShoppingModePopup from "./components/ShoppingModePopUp";
 import BarcodeScannerPage from "./pages/BarCodeScanner";
-import ProductPage from './pages/ProductPage'
-import ProductDetail from './pages/ProductDetail'
+import ProductPage from "./pages/ProductPage";
+import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
 
 function App() {
   const [showModal, setShowModal] = useState(true);
@@ -51,16 +52,14 @@ function App() {
             <Route path="/" element={<Layout />}>
               {/* Different routes based on shopping mode */}
               {shoppingMode === "in-store" ? (
-                <Route index element={<BarcodeScannerPage/>} />
+                <Route index element={<BarcodeScannerPage />} />
               ) : (
-                <Route index element={<ProductPage/>} />
+                <Route index element={<ProductPage />} />
               )}
-              <Route
-                path="products"
-                element={<ProductPage/>}
-              />
-              <Route path="scan" element={<BarcodeScannerPage/>} />
-              <Route path="product/:id" element={<ProductDetail/>} />
+              <Route path="products" element={<ProductPage />} />
+              <Route path="scan" element={<BarcodeScannerPage />} />
+              <Route path="product/:id" element={<ProductDetail />} />
+              <Route path="/cart" element={<Cart />} />
             </Route>
           </Routes>
         </BrowserRouter>
