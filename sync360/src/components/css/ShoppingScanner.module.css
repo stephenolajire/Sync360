@@ -316,6 +316,7 @@
 
 .Scan {
    margin: 70% 0;
+   text-align: center;
  }
 
 .walletSection {
@@ -607,6 +608,6 @@
     font-size: var(--subtext);
   }
   .Scan {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 }
