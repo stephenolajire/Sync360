@@ -204,10 +204,96 @@
   .paymentMethods {
     grid-template-columns: 1fr;
   }
+
+  .detailsSection {
+    padding: 1.5rem;
+  }
+
+  .header {
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .content {
+    gap: 2rem;
+  }
+
+  .orderItem {
+    grid-template-columns: 8rem 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .orderItem img {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .itemDetails h4 {
+    font-size: var(--subtext);
+    margin-bottom: 0.3rem;
+  }
+
+  .itemDetails p {
+    font-size: var(--subtext-mobile);
+    margin: 0.2rem 0;
+  }
+
+  .price {
+    margin-top: 0.5rem;
+  }
+
+  .orderItems {
+    gap: 1rem;
+  }
+
+  .orders {
+    font-size: var(--header-four-mobile);
+  }
+
+  .shipping {
+    font-size: var(--header-four-mobile);
+  }
+
+  .paymentModal {
+    padding: 1.5rem;
+  }
+
+  .paymentModal h3 {
+    font-size: var(--header-four-mobile);
+  }
+
+  .paymentMethods {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
 }
 
-@media (max-width:467px) {
-    .itemDetails h4{
-        font-size: 2rem;
-    }
+@media (max-width: 467px) {
+  .itemDetails h4{
+    font-size: 2rem;
+  }
+
+  .orderItem {
+    grid-template-columns: 6rem 1fr;
+  }
+
+  .orderItem img {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .itemDetails h4 {
+    font-size: var(--subtext-mobile);
+  }
+
+  .price {
+    font-size: var(--subtext);
+  }
+
+  .infoCard p {
+    font-size: var(--subtext-mobile);
+    margin: 0.3rem 0;
+  }
 }
