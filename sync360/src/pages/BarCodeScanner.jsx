@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ScanMode from "../components/ScanMode";
+import ShoppingScanner from "../components/ShoppingScanner";
 import styles from "./css/BarcodeScannerPage.module.css";
 
 const BarcodeScannerPage = () => {
@@ -38,7 +38,7 @@ const BarcodeScannerPage = () => {
 
   return (
     <div className={styles.scannerPage}>
-      <div className={styles.scannerHeader}>
+      {/* <div className={styles.scannerHeader}>
         <h1>Product Scanner</h1>
         <p>Start scanning items to add them to your cart</p>
       </div>
@@ -66,14 +66,14 @@ const BarcodeScannerPage = () => {
           Open Scanner
         </button>
 
-        {/* For demo purposes only */}
+        
         <button className={styles.demoButton} onClick={simulateScan}>
           Simulate Successful Scan
         </button>
-      </div>
+      </div> */}
 
       {/* The scan mode component handles both camera and confirmation */}
-      <ScanMode
+      <ShoppingScanner
         isOpen={showScanMode}
         onClose={handleScanClose}
         productName={scannedProduct?.name}

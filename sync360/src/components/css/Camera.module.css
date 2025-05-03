@@ -1,8 +1,10 @@
+/* Camera.module.css */
 .cameraContainer {
   position: relative;
   width: 100%;
   height: 100%;
   background-color: var(--primary-color);
+  overflow: hidden;
 }
 
 .video {
@@ -15,16 +17,27 @@
   padding: 2rem;
   text-align: center;
   color: var(--error-1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error p {
+  margin-bottom: 2rem;
+  color: var(--error-1);
 }
 
 .error button {
   margin-top: 1rem;
   padding: 1rem 2rem;
   background-color: var(--secondary-color);
-  color: var(--background-color);
+  color: white;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
+  font-size: var(--subtext);
 }
 
 .closeButton {
@@ -33,8 +46,61 @@
   right: 2rem;
   padding: 1rem 2rem;
   background-color: var(--error-1);
-  color: var(--background-color);
+  color: white;
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
+  font-size: var(--subtext);
+  z-index: 10;
+}
+
+.scanOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.scanLine {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--secondary-color);
+  opacity: 0.8;
+  box-shadow: 0 0 8px 2px rgba(82, 182, 97, 0.6);
+  animation: scanAnimation 2s linear infinite;
+}
+
+@keyframes scanAnimation {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 0;
+  }
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .closeButton {
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    font-size: var(--subtext-mobile);
+  }
+  
+  .error p {
+    font-size: var(--body-text-mobile);
+  }
+  
+  .error button {
+    font-size: var(--subtext-mobile);
+    padding: 0.8rem 1.5rem;
+  }
 }
