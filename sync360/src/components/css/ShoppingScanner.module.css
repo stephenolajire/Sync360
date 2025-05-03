@@ -448,6 +448,10 @@
   gap: 1rem;
 }
 
+.Scan {
+  margin: 70% 0;
+}
+
 .scannedItem {
   display: grid;
   grid-template-columns: 6rem 1fr auto;
