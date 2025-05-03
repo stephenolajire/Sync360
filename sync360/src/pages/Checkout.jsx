@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdArrowBack, MdShoppingCart } from 'react-icons/md';
 import styles from './css/Checkout.module.css';
+
 
 const Checkout = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +16,8 @@ const Checkout = () => {
     zipCode: '',
   });
 
+  const navigate = useNavigate()
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -27,7 +30,9 @@ const Checkout = () => {
     e.preventDefault();
     // Handle form submission
     console.log('Form submitted:', formData);
+    navigate('/shipping-details')
   };
+  
 
   return (
     <div className={styles.checkoutPage}>

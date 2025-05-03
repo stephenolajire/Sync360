@@ -7,6 +7,7 @@ import ProductPage from "./pages/ProductPage";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import ShippingDetails from "./pages/ShippingDetails";
 
 function App() {
   const [showModal, setShowModal] = useState(true);
@@ -62,6 +63,7 @@ function App() {
               <Route path="product/:id" element={<ProductDetail />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/shipping-details" element={<ShippingDetails />} />
             </Route>
           </Routes>
         </BrowserRouter>
