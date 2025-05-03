@@ -606,4 +606,7 @@
   .itemTotal {
     font-size: var(--subtext);
   }
+  .Scan {
+    font-size: 1.2rem;
+  }
 }
