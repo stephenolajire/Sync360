@@ -314,6 +314,10 @@
   opacity: 0.5;
 }
 
+ Scan {
+   margin: 70% 0;
+ }
+
 .walletSection {
   background-color: #fff2f2; /* Light pink */
   border-radius: 1.2rem;
