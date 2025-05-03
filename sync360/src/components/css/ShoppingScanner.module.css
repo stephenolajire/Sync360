@@ -314,6 +314,11 @@
   opacity: 0.5;
 }
 
+.Scan {
+   margin: 70% 0;
+   text-align: center;
+ }
+
 .walletSection {
   background-color: #fff2f2; /* Light pink */
   border-radius: 1.2rem;
@@ -605,5 +610,8 @@
 
   .itemTotal {
     font-size: var(--subtext);
+  }
+  .Scan {
+    font-size: 1.4rem;
   }
 }
