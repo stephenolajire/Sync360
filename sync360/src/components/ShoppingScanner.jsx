@@ -313,6 +313,7 @@ const ShoppingScanner = () => {
           <div className={styles.cameraFrameIcon}>
             <div className={styles.cornerTopLeft}></div>
             <div className={styles.cornerTopRight}></div>
+            // <p>Scan the barcode to start shopping </p>
             <div className={styles.cornerBottomLeft}></div>
             <div className={styles.cornerBottomRight}></div>
           </div>

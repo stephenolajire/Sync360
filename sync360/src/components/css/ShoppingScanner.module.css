@@ -493,8 +493,8 @@
 
 .cameraFrameIcon {
   position: relative;
-  width: 80%;
-  height:80% ;
+  width: 100%;
+  height: 100%;
 }
 
 .cornerTopLeft,
@@ -502,8 +502,8 @@
 .cornerBottomLeft,
 .cornerBottomRight {
   position: absolute;
-  width: 80%;
-  height: 80%;
+  width: 60px;
+  height: 100px;
   border: 2px solid currentColor;
 }
 
@@ -512,7 +512,7 @@
   left: 0;
   border-right: 0;
   border-bottom: 0;
-  border-top-left-radius: 20px;
+  border-top-left-radius: 30px;
 }
 
 .cornerTopRight {
@@ -520,7 +520,7 @@
   right: 0;
   border-left: 0;
   border-bottom: 0;
-  border-top-right-radius: 20px;
+  border-top-right-radius: 30px;
 }
 
 .cornerBottomLeft {
@@ -528,7 +528,7 @@
   left: 0;
   border-right: 0;
   border-top: 0;
-  border-bottom-left-radius: 20px;
+  border-bottom-left-radius: 30px;
 }
 
 .cornerBottomRight {
@@ -536,7 +536,7 @@
   right: 0;
   border-left: 0;
   border-top: 0;
-  border-bottom-right-radius: 20px;
+  border-bottom-right-radius: 30px;
 }
 
 /* Responsive adjustments */
