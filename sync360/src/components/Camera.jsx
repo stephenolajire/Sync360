@@ -2,8 +2,22 @@ import React, { useState } from "react";
 import { useZxing } from "react-zxing";
 import styles from "./css/Camera.module.css";
 
-const Camera = ({ onScan, onError, onClose }) => {
+const Camera = ({ onScan, onError, onClose, onImageCapture }) => {
   const [error, setError] = useState(null);
+
+  const captureFrame = () => {
+    if (videoRef.current) {
+      const video = videoRef.current;
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(video, 0, 0);
+      const imageUrl = canvas.toDataURL("image/jpeg");
+      return imageUrl;
+    }
+    return null;
+  };
 
   const {
     ref: videoRef,
@@ -11,12 +25,19 @@ const Camera = ({ onScan, onError, onClose }) => {
     error: zxingError,
   } = useZxing({
     onDecodeResult(result) {
-      // Handle successful scan
+      // Capture frame when barcode is detected
+      const capturedImage = captureFrame();
+
       if (onScan) {
         onScan({
           format: result.getBarcodeFormat().toString(),
           data: result.getText(),
+          image: capturedImage, // Include captured image in scan result
         });
+      }
+
+      if (onImageCapture && capturedImage) {
+        onImageCapture(capturedImage);
       }
     },
     onError(error) {
