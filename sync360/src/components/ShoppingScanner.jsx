@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import styles from "./css/ShoppingScanner.module.css";
 import Camera from "./Camera";
+import Swal from "sweetalert2";
 
 const ShoppingScanner = () => {
   const [scanMode, setScanMode] = useState("confirmed");
@@ -61,14 +62,33 @@ const ShoppingScanner = () => {
     };
   }, [scanMode, scanStartTime, productDetails.image]);
 
-  // Handle adding product to cart
-  const handleAddToCart = () => {
+  // Update the handleAddToCart function
+  const handleAddToCart = async () => {
+    // Show loading toast
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    // Show loading state
+    await Toast.fire({
+      icon: "info",
+      title: "Adding to cart...",
+    });
+
     // Add current item to scanned items list
     setScannedItems((prev) => [
       ...prev,
       {
         ...productDetails,
-        id: Date.now(), // temporary unique id
+        id: Date.now(),
         totalPrice: productDetails.price * productDetails.quantity,
       },
     ]);
@@ -77,6 +97,14 @@ const ShoppingScanner = () => {
     setCartTotal(
       (prev) => prev + productDetails.price * productDetails.quantity
     );
+
+    // Show success message
+    await Toast.fire({
+      icon: "success",
+      title: `Added ${productDetails.quantity} ${productDetails.name} to cart`,
+      background: "#4CAF50",
+      color: "#fff",
+    });
 
     // Reset to confirmed view
     setScanMode("confirmed");

@@ -304,24 +304,24 @@
     height: 25rem;
   }
 
-  .container{
-    padding:0rem;
+  .container {
+    padding: 0rem;
   }
-  
+
   .shopName {
     font-size: var(--header-three-mobile);
   }
-  
+
   .productsGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     padding: 1rem;
   }
-  
+
   .productImage {
     height: 15rem;
   }
-  
+
   .productInfo {
     padding: 1rem;
   }
@@ -339,11 +339,11 @@
   .quantityValue {
     min-width: 2.5rem;
   }
-  
+
   .addToCartButton {
     padding: 1.5rem;
     font-size: var(--subtext-mobile);
-    width:100%;
+    width: 100%;
   }
 
   .addToCartButton span {
@@ -368,4 +368,20 @@
     font-size: var(--subtext);
     margin-top: 0.5rem;
   }
+}
+
+/* Add at the end of your CSS file */
+:global(.swal2-toast) {
+  padding: 0.5rem 1rem !important;
+  width: auto !important;
+  margin: 1rem !important;
+}
+
+:global(.swal2-timer-progress-bar) {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+:global(.swal2-title) {
+  font-size: 1.4rem !important;
+  margin: 0.5rem 0 !important;
 }

@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./css/ProductPage.module.css";
 import { sampleProducts } from "../data/sampledata";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const shopData = {
   name: "Urban Trends",
@@ -61,9 +62,29 @@ const ProductPage = () => {
   };
 
   // Function to add product to cart
-  const addToCart = (product) => {
+  const addToCart = async (product) => {
     const quantity = quantities[product.id] || 1;
 
+    // Show loading toast
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    // Show loading state
+    await Toast.fire({
+      icon: "info",
+      title: "Adding to cart...",
+    });
+
+    // Update cart
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
 
@@ -78,11 +99,16 @@ const ProductPage = () => {
       }
     });
 
-    // Reset quantity after adding to cart
+    // Reset quantity
     setQuantities((prev) => ({ ...prev, [product.id]: 1 }));
 
-    // Show confirmation (in a real app, you might want to use a toast notification)
-    alert(`Added ${quantity} ${product.name} to cart`);
+    // Show success message
+    await Toast.fire({
+      icon: "success",
+      title: `Added ${quantity} ${product.name} to cart`,
+      background: "#4CAF50",
+      color: "#fff",
+    });
   };
 
   // Function to navigate to product details
