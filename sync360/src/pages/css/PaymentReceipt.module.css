@@ -1,0 +1,408 @@
+/* PaymentReceipt.module.css */
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  font-family: "Nunito", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1.6rem;
+  border-bottom: 1px solid var(--foreground-color);
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 6rem;
+}
+
+.backButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-title);
+  padding: 0.8rem;
+  margin-right: 0.8rem;
+}
+
+.headerTitle {
+  flex-grow: 1;
+  font-size: var(--header-five);
+  font-weight: 500;
+  color: var(--text-title);
+  text-align: center;
+  margin: 0;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem;
+  gap: 2.4rem;
+}
+
+.successSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.successIcon {
+  width: 5.6rem;
+  height: 5.6rem;
+  background-color: var(--success-1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.6rem;
+  position: relative;
+}
+
+.successIcon::before {
+  content: '';
+  position: absolute;
+  width: 6.4rem;
+  height: 6.4rem;
+  border: 1px dashed var(--success-1);
+  border-radius: 50%;
+}
+
+.successTitle {
+  font-size: var(--header-five);
+  color: var(--text-title);
+  margin-bottom: 0.8rem;
+}
+
+.thankYouText {
+  font-size: var(--subtext);
+  color: var(--text-body);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.sectionTitle {
+  font-size: var(--subtext);
+  color: var(--text-body);
+  font-weight: 500;
+  margin: 0;
+}
+
+.summaryCard,
+.customerCard,
+.paymentMethodCard {
+  background-color: var(--foreground-color);
+  border-radius: 0.8rem;
+  padding: 1.6rem;
+}
+
+.summaryRow,
+.storeRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.summaryRow:last-child {
+  margin-bottom: 0;
+}
+
+.summaryLabel {
+  font-size: var(--subtext);
+  color: var(--text-body);
+}
+
+.summaryValue {
+  font-size: var(--subtext);
+  color: var(--text-title);
+  font-weight: 500;
+}
+
+.storeLogo {
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--grey-6);
+  border-radius: 0.4rem;
+  overflow: hidden;
+}
+
+.storeLogo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.itemsCard {
+  background-color: var(--foreground-color);
+  border-radius: 0.8rem;
+  overflow: hidden;
+}
+
+.itemsHeader {
+  display: grid;
+  grid-template-columns: 2fr 0.5fr 1fr 1fr;
+  padding: 1.2rem 1.6rem;
+  background-color: var(--background-color);
+  border-bottom: 1px solid var(--grey-6);
+  font-size: var(--subtext);
+  color: var(--text-body);
+}
+
+.itemsList {
+  padding: 1.6rem;
+}
+
+.itemRow {
+  display: grid;
+  grid-template-columns: 2fr 0.5fr 1fr 1fr;
+  margin-bottom: 1.6rem;
+}
+
+.itemRow:last-child {
+  margin-bottom: 0;
+}
+
+.itemName {
+  font-size: var(--subtext);
+  color: var(--text-title);
+  font-weight: 500;
+}
+
+.itemDescription {
+  font-size: 1.4rem;
+  color: var(--grey-3);
+  margin-top: 0.4rem;
+}
+
+.qtyColumn,
+.priceColumn,
+.subtotalColumn {
+  font-size: var(--subtext);
+  color: var(--text-title);
+  display: flex;
+  align-items: center;
+}
+
+.subtotalColumn {
+  font-weight: 500;
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--grey-6);
+  margin: 0 1.6rem;
+}
+
+.totalSection {
+  padding: 1.6rem;
+}
+
+.taxRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--subtext);
+  color: var(--text-body);
+  margin-bottom: 0.8rem;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--subtext);
+  color: var(--text-title);
+  font-weight: 600;
+}
+
+.totalAmount {
+  color: var(--text-title);
+  font-weight: 700;
+}
+
+.customerCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.customerInfo {
+  display: flex;
+  align-items: center;
+}
+
+.customerAvatar {
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 1.2rem;
+}
+
+.customerAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.customerName {
+  font-size: var(--subtext);
+  color: var(--text-title);
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.customerContact {
+  font-size: 1.4rem;
+  color: var(--grey-3);
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  color: var(--grey-3);
+  cursor: pointer;
+  padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paymentMethodCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paymentMethod {
+  display: flex;
+  align-items: center;
+}
+
+.paymentIcon {
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--success-2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1.2rem;
+}
+
+.dollarIcon {
+  font-size: 2.4rem;
+  color: var(--success-1);
+  font-weight: 700;
+}
+
+.paymentName {
+  font-size: var(--subtext);
+  color: var(--text-title);
+  font-weight: 500;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6rem;
+  margin-top: 1.6rem;
+}
+
+.printButton,
+.newSaleButton {
+  padding: 1.6rem;
+  border-radius: 0.8rem;
+  font-size: var(--button-text);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.printButton {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.printButton svg {
+  margin-right: 0.8rem;
+}
+
+.newSaleButton {
+  background-color: white;
+  border: 1px solid var(--grey-6);
+  color: var(--text-title);
+}
+
+/* Responsive styles */
+@media screen and (max-width: 480px) {
+  .content {
+    padding: 1.2rem;
+    gap: 1.6rem;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .headerTitle {
+    font-size: var(--header-five-mobile);
+  }
+
+  .successTitle {
+    font-size: var(--header-five-mobile);
+  }
+
+  .sectionTitle {
+    font-size: var(--subtext-mobile);
+  }
+
+  .summaryLabel,
+  .summaryValue,
+  .itemName,
+  .qtyColumn,
+  .priceColumn,
+  .subtotalColumn,
+  .taxRow,
+  .totalRow,
+  .customerName,
+  .paymentName {
+    font-size: var(--subtext-mobile);
+  }
+
+  .itemDescription,
+  .customerContact {
+    font-size: 1.2rem;
+  }
+
+  .printButton,
+  .newSaleButton {
+    font-size: var(--button-text-mobile);
+    padding: 1.2rem;
+  }
+
+  .itemsHeader {
+    grid-template-columns: 1.5fr 0.5fr 1fr 1fr;
+  }
+
+  .itemRow {
+    grid-template-columns: 1.5fr 0.5fr 1fr 1fr;
+  }
+}

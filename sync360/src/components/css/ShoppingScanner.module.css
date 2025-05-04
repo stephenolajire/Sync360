@@ -19,7 +19,7 @@
 }
 
 .headerBar {
-  background-color: #E52929; /* Coca-Cola red */
+  background-color: #e52929; /* Coca-Cola red */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -155,7 +155,7 @@
 }
 
 .withOverlay {
-  background-image: url('/api/placeholder/400/320');
+  background-image: url("/api/placeholder/400/320");
   background-size: cover;
   background-position: center;
 }
@@ -304,7 +304,7 @@
   align-items: center;
 }
 
-.buttons{
+.buttons {
   height: 20vh;
   width: 100%;
 }
@@ -315,9 +315,9 @@
 }
 
 .Scan {
-   margin: 70% 0;
-   text-align: center;
- }
+  margin: 70% 0;
+  text-align: center;
+}
 
 .walletSection {
   background-color: #fff2f2; /* Light pink */
@@ -548,44 +548,80 @@
   border-bottom-right-radius: 30px;
 }
 
+.scanningIndicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.scanLine {
+  width: 100%;
+  height: 2px;
+  background: #00ff00;
+  animation: scan 2s linear infinite;
+  box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
+}
+
+.capturedImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100px);
+  }
+  100% {
+    transform: translateY(100px);
+  }
+}
+
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .productDetails {
     flex-direction: column;
   }
-  
+
   .productImage {
     width: 6rem;
     height: 6rem;
     margin-bottom: 1rem;
   }
-  
+
   .productInfo {
     margin-left: 0;
   }
-  
+
   .actionBar {
     flex-direction: column;
   }
-  
+
   .quantityControls {
     width: 100%;
     justify-content: space-between;
   }
-  
+
   .addToCart {
     width: 100%;
     padding: 1.2rem 0;
   }
-  
+
   .headerTitle {
     font-size: var(--header-five-mobile);
   }
-  
+
   .productName {
     font-size: var(--header-five-mobile);
   }
-  
+
   .balanceText {
     font-size: var(--header-three-mobile);
   }

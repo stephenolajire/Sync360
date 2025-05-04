@@ -15,7 +15,7 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className={styles.section}>
+        {/* <div className={styles.section}>
           <h4>Quick Links</h4>
           <ul>
             <li>
@@ -31,7 +31,7 @@ const Footer = () => {
               <a href="#contact">Contact</a>
             </li>
           </ul>
-        </div>
+        </div> */}
 
         <div className={styles.section}>
           <h4>Contact Us</h4>

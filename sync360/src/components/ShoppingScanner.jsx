@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { useZxing } from "react-zxing";
 import {
   X,
   Camera as CameraIcon,
@@ -25,21 +26,39 @@ const ShoppingScanner = () => {
   const [walletBalance, setWalletBalance] = useState(5290000);
   const [cartTotal, setCartTotal] = useState(24500);
   const [stream, setStream] = useState(null);
+  const [capturedImage, setCapturedImage] = useState(null);
+  const [isScanning, setIsScanning] = useState(false);
 
-  const videoRef = useRef(null);
+  const {
+    ref: zxingRef,
+    result,
+    error,
+  } = useZxing({
+    onDecodeResult(result) {
+      // Handle successful scan
+      const scannedCode = result.getText();
+      handleSuccessfulScan(scannedCode);
+    },
+    onError(error) {
+      console.error("Scanning error:", error);
+    },
+  });
 
   useEffect(() => {
-    // Start camera when in scanning mode
     if (scanMode === "scanning") {
       startCamera();
+      setIsScanning(true);
 
-      // For demo: simulate finding an item after 3 seconds
-      const timer = setTimeout(() => {
+      // Simulate scanning process
+      const scanningTimer = setTimeout(() => {
+        setIsScanning(false);
+        captureFrame(); // Capture the frame
+        stopCamera();
         setScanMode("found");
       }, 3000);
 
       return () => {
-        clearTimeout(timer);
+        clearTimeout(scanningTimer);
         stopCamera();
       };
     }
@@ -60,8 +79,8 @@ const ShoppingScanner = () => {
       );
       setStream(mediaStream);
 
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
+      if (zxingRef.current) {
+        zxingRef.current.srcObject = mediaStream;
       }
     } catch (err) {
       console.error("Error accessing camera:", err);
@@ -91,7 +110,9 @@ const ShoppingScanner = () => {
     ]);
 
     // Update cart total
-    setCartTotal((prev) => prev + productDetails.price * productDetails.quantity);
+    setCartTotal(
+      (prev) => prev + productDetails.price * productDetails.quantity
+    );
 
     // Reset to confirmed view
     setScanMode("confirmed");
@@ -120,6 +141,36 @@ const ShoppingScanner = () => {
     })
       .format(amount)
       .replace("NGN", "₦");
+  };
+
+  const handleSuccessfulScan = async (barcode) => {
+    setIsScanning(false);
+
+    try {
+      // In production, this would be an API call to get product details
+      // const response = await fetch(`/api/products/${barcode}`);
+      // const productData = await response.json();
+      // setProductDetails(productData);
+
+      // For now, we'll just use mock data
+      captureFrame();
+      setScanMode("found");
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+    }
+  };
+
+  const captureFrame = () => {
+    if (zxingRef.current) {
+      const video = zxingRef.current;
+      const canvas = document.createElement("canvas");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(video, 0, 0);
+      const imageUrl = canvas.toDataURL("image/jpeg");
+      setCapturedImage(imageUrl);
+    }
   };
 
   const renderScanningView = () => (
@@ -171,13 +222,7 @@ const ShoppingScanner = () => {
       </div>
 
       <div className={styles.cameraPreview}>
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          muted
-          className={styles.videoStream}
-        />
+        <video ref={zxingRef} className={styles.videoStream} />
         <div className={styles.scannerFrame}>
           <div className={`${styles.scannerCorner} ${styles.topLeft}`}></div>
           <div className={`${styles.scannerCorner} ${styles.topRight}`}></div>
@@ -185,6 +230,12 @@ const ShoppingScanner = () => {
           <div
             className={`${styles.scannerCorner} ${styles.bottomRight}`}
           ></div>
+          {isScanning && (
+            <div className={styles.scanningIndicator}>
+              <div className={styles.scanLine}></div>
+              <p>Align barcode within frame</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -239,6 +290,13 @@ const ShoppingScanner = () => {
       </div>
 
       <div className={`${styles.cameraPreview} ${styles.withOverlay}`}>
+        {capturedImage && (
+          <img
+            src={capturedImage}
+            alt="Scanned item"
+            className={styles.capturedImage}
+          />
+        )}
         <div className={styles.foundOverlay}>
           <span className={styles.foundText}>Item Found</span>
         </div>
