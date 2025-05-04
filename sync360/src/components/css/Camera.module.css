@@ -2,8 +2,8 @@
 .cameraContainer {
   position: relative;
   width: 100%;
-  height: 100%;
-  background-color: var(--primary-color);
+  height: 100vh;
+  background: #000;
   overflow: hidden;
 }
 
@@ -14,14 +14,15 @@
 }
 
 .error {
-  padding: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  color: var(--error-1);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .error p {
@@ -42,15 +43,14 @@
 
 .closeButton {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
-  padding: 1rem 2rem;
-  background-color: var(--error-1);
+  top: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: var(--subtext);
   z-index: 10;
 }
 
@@ -60,18 +60,69 @@
   left: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
 }
 
-.scanLine {
+.scanFrame {
+  position: relative;
+  width: 80%;
+  height: 200px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+}
+
+.scanCorner {
   position: absolute;
-  left: 0;
-  width: 100%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #00ff00;
+}
+
+.scanCorner:nth-child(1) {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.scanCorner:nth-child(2) {
+  top: -2px;
+  right: -2px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.scanCorner:nth-child(3) {
+  bottom: -2px;
+  left: -2px;
+  border-right: none;
+  border-top: none;
+}
+
+.scanCorner:nth-child(4) {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+.scanLine {
+  width: 80%;
   height: 2px;
-  background-color: var(--secondary-color);
-  opacity: 0.8;
-  box-shadow: 0 0 8px 2px rgba(82, 182, 97, 0.6);
-  animation: scanAnimation 2s linear infinite;
+  background: #00ff00;
+  animation: scan 2s linear infinite;
+}
+
+.scanText {
+  color: white;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes scanAnimation {
@@ -86,6 +137,15 @@
   }
 }
 
+@keyframes scan {
+  0% {
+    transform: translateY(-50px);
+  }
+  100% {
+    transform: translateY(50px);
+  }
+}
+
 /* Media Queries */
 @media screen and (max-width: 768px) {
   .closeButton {
@@ -94,11 +154,11 @@
     padding: 0.8rem 1.5rem;
     font-size: var(--subtext-mobile);
   }
-  
+
   .error p {
     font-size: var(--body-text-mobile);
   }
-  
+
   .error button {
     font-size: var(--subtext-mobile);
     padding: 0.8rem 1.5rem;
