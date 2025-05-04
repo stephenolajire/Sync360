@@ -51,7 +51,7 @@ const PaymentReceipt = () => {
         <button className={styles.backButton}>
           <ArrowLeft size={24} />
         </button>
-        <h5 className={styles.headerTitle}>Payment Confirmation & Receipt</h5>
+        <h5 className={styles.headerTitle}>Payment Receipt</h5>
       </div>
 
       <div className={styles.content}>
