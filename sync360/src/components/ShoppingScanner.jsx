@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   X,
   Camera as CameraIcon,
@@ -9,14 +9,14 @@ import {
   Info,
 } from "lucide-react";
 import styles from "./css/ShoppingScanner.module.css";
+import Camera from "./Camera";
 
 const ShoppingScanner = () => {
-  // Remove stream and videoRef as they're handled by Camera component
   const [scanMode, setScanMode] = useState("confirmed");
-  const [scannedItems, setScannedItems] = useState([]); // Add state for scanned items
+  const [scannedItems, setScannedItems] = useState([]);
   const [productDetails, setProductDetails] = useState({
     name: "Coca Cola",
-    description: "(Medium side)",
+    description: "(Medium size)",
     price: 500,
     currency: "₦",
     quantity: 1,
@@ -25,36 +25,43 @@ const ShoppingScanner = () => {
   });
   const [walletBalance, setWalletBalance] = useState(5290000);
   const [cartTotal, setCartTotal] = useState(24500);
-  const [capturedImage, setCapturedImage] = useState(null); // Add state for captured image
+  const [capturedImage, setCapturedImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [scanStartTime, setScanStartTime] = useState(null);
 
-  const handleScan = async ({ format, data }) => {
-    try {
-      // Here you would typically make an API call to get product details
-      // For now, using mock data
-      // const response = await fetch(`/api/products/${data}`);
-      // const productData = await response.json();
+  // This effect handles the scanning timer
+  useEffect(() => {
+    let timer = null;
 
-      // Mock successful scan
-      setScanMode("found");
-      // setProductDetails(productData); // Uncomment when API is ready
-    } catch (error) {
-      console.error("Error processing scan:", error);
+    // Only start the timer if we're in scanning mode
+    if (scanMode === "scanning" && scanStartTime !== null) {
+      console.log("Scanning started, timer running");
+
+      // Set timer to trigger after 3 seconds of scanning
+      timer = setTimeout(() => {
+        console.log("Scan complete after 3 seconds");
+        // Capture the image and move to found mode
+        setCapturedImage(productDetails.image);
+        setScanMode("found");
+        setIsLoading(true);
+
+        // Set another timer for the loading state (2 seconds)
+        setTimeout(() => {
+          console.log("Loading complete, showing product details");
+          setIsLoading(false);
+        }, 2000);
+      }, 3000);
     }
-  };
 
-  const handleScanError = (error) => {
-    console.error("Scan error:", error);
-    // Handle error appropriately
-  };
+    // Clean up the timer if component unmounts or mode changes
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [scanMode, scanStartTime, productDetails.image]);
 
-  const handleCloseCamera = () => {
-    setScanMode("confirmed");
-  };
-
-  const startScanning = () => {
-    setScanMode("scanning");
-  };
-
+  // Handle adding product to cart
   const handleAddToCart = () => {
     // Add current item to scanned items list
     setScannedItems((prev) => [
@@ -75,8 +82,17 @@ const ShoppingScanner = () => {
     setScanMode("confirmed");
   };
 
+  const handleStartScanning = () => {
+    // Set scanning mode when the user clicks the scan button
+    setScanMode("scanning");
+    setScanStartTime(Date.now()); // Record when scanning started
+  };
+
   const handleClose = () => {
-    // In a real app, this would close the component
+    // Reset to the initial state
+    setScanMode("confirmed");
+    setCapturedImage(null);
+    setScanStartTime(null);
   };
 
   const handleQuantityChange = (change) => {
@@ -100,10 +116,16 @@ const ShoppingScanner = () => {
 
   const renderScanningView = () => (
     <div className={styles.scanContainer}>
+      <div className={styles.header}>
+        <button className={styles.closeButton} onClick={handleClose}>
+          <X size={24} />
+        </button>
+      </div>
       <Camera
-        onScan={handleScan}
-        onError={handleScanError}
-        onClose={handleCloseCamera}
+        onScan={() => {}}
+        onError={() => {}}
+        onClose={handleClose}
+        onImageCapture={() => {}}
       />
     </div>
   );
@@ -115,27 +137,63 @@ const ShoppingScanner = () => {
           className={styles.backgroundImage}
           style={{ backgroundImage: `url(${capturedImage})` }}
         >
-          {/* Product details overlay */}
-          <div className={styles.productDetails}>
-            <div className={styles.productImage}>
-              <img src={productDetails.image} alt={productDetails.name} />
+          {isLoading ? (
+            <div className={styles.loadingOverlay}>
+              <div className={styles.loadingSpinner}></div>
+              <p>Finding product details...</p>
             </div>
-            <div className={styles.productInfo}>
-              <h3 className={styles.productName}>
-                {productDetails.name}{" "}
-                <span className={styles.productDescription}>
-                  {productDetails.description}
-                </span>
-              </h3>
-              <div className={styles.productStatus}>
-                <span className={styles.inStock}>● In Stock</span>
-                <span className={styles.productPrice}>
-                  {productDetails.currency}
-                  {productDetails.price}
-                </span>
+          ) : (
+            <div className={styles.productDetails}>
+              <div className={styles.productImage}>
+                <img src={productDetails.image} alt={productDetails.name} />
               </div>
+              <div className={styles.productInfo}>
+                <h3 className={styles.productName}>
+                  {productDetails.name}{" "}
+                  <span className={styles.productDescription}>
+                    {productDetails.description}
+                  </span>
+                </h3>
+                <div className={styles.productStatus}>
+                  <span className={styles.inStock}>● In Stock</span>
+                  <span className={styles.productPrice}>
+                    {productDetails.currency}
+                    {productDetails.price}
+                  </span>
+                </div>
+              </div>
+
+              {/* Add quantity controls and add to cart button */}
+              <div className={styles.quantityControls}>
+                <button
+                  className={styles.quantityButton}
+                  onClick={() => handleQuantityChange(-1)}
+                >
+                  <Minus size={16} />
+                </button>
+                <span className={styles.quantity}>
+                  {productDetails.quantity}
+                </span>
+                <button
+                  className={styles.quantityButton}
+                  onClick={() => handleQuantityChange(1)}
+                >
+                  <Plus size={16} />
+                </button>
+              </div>
+
+              <button
+                className={styles.addToCartButton}
+                onClick={handleAddToCart}
+              >
+                Add to Cart
+              </button>
+
+              <button className={styles.closeButton} onClick={handleClose}>
+                <X size={24} />
+              </button>
             </div>
-          </div>
+          )}
         </div>
       )}
     </div>
@@ -143,50 +201,38 @@ const ShoppingScanner = () => {
 
   const renderConfirmedView = () => (
     <div className={styles.mainContainer}>
-      {/* <div className={styles.walletSection}>
-        <div className={styles.balanceContainer}>
-          <h2 className={styles.balanceText}>
-            {formatCurrency(walletBalance)}
-          </h2>
-          <button className={styles.balanceBtn}>
-            <CheckCircle2 size={16} className={styles.balanceIcon} />
-            <span>Show Balance</span>
-          </button>
-        </div>
-        <button className={styles.fundWalletBtn}>
-          <Plus size={16} />
-          <span>Fund Wallet</span>
-        </button>
-      </div> */}
-
       <div className={styles.confirmationMessage}>
         <div className={styles.cameraIconWrapper}>
           <div className={styles.cameraFrameIcon}>
             <div className={styles.cornerTopLeft}></div>
             <div className={styles.cornerTopRight}></div>
-            <p className={styles.Scan}>Scan the barcode to start shopping </p>
+            <p className={styles.Scan}>
+              {scannedItems.length > 0
+                ? "Items added to cart successfully!"
+                : "Scan the barcode to start shopping"}
+            </p>
             <div className={styles.cornerBottomLeft}></div>
             <div className={styles.cornerBottomRight}></div>
           </div>
         </div>
       </div>
 
-      {/* Add Scan Button */}
-      <div className={styles.buttons}>
-        <button className={styles.startScanButton} onClick={startScanning}>
-          <CameraIcon size={20} />
-          Scan Item
-        </button>
-
-        {/* Show scanned items if any */}
-        {/* {scannedItems.length > 0 && (
+      {/* Show scanned items if any */}
+      {scannedItems.length > 0 && (
         <div className={styles.scannedItemsList}>
-          {scannedItems.map(item => (
+          <h3>Items in Cart</h3>
+          {scannedItems.map((item) => (
             <div key={item.id} className={styles.scannedItem}>
-              <img src={item.image} alt={item.name} className={styles.itemImage} />
+              <img
+                src={item.image}
+                alt={item.name}
+                className={styles.itemImage}
+              />
               <div className={styles.itemDetails}>
-                <h3>{item.name}</h3>
-                <p>{item.quantity} x {formatCurrency(item.price)}</p>
+                <h4>{item.name}</h4>
+                <p>
+                  {item.quantity} x {formatCurrency(item.price)}
+                </p>
               </div>
               <span className={styles.itemTotal}>
                 {formatCurrency(item.totalPrice)}
@@ -194,7 +240,17 @@ const ShoppingScanner = () => {
             </div>
           ))}
         </div>
-      )} */}
+      )}
+
+      {/* Add Scan Button */}
+      <div className={styles.buttons}>
+        <button
+          className={styles.startScanButton}
+          onClick={handleStartScanning}
+        >
+          <CameraIcon size={20} />
+          Scan Item
+        </button>
 
         <div className={styles.cartTotal}>
           <span className={styles.totalText}>Total Value in Cart:</span>

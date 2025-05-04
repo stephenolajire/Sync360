@@ -1,331 +1,31 @@
-/* ShoppingScanner.module.css */
-
-/* Common Styles */
 .scannerContainer {
   width: 100%;
-  height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100vh;
   background-color: var(--background-color);
   display: flex;
   flex-direction: column;
   font-family: "Nunito", sans-serif;
 }
 
-/* Scanning & Found View Styles */
-.scanContainer {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.headerBar {
-  background-color: #e52929; /* Coca-Cola red */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.6rem;
-  color: white;
-}
-
-.backButton {
-  background: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.headerTitle {
-  font-size: var(--header-five);
-  font-weight: 500;
-  color: white;
-  margin: 0;
-  flex-grow: 1;
-  margin-left: 1rem;
-}
-
-.cartIconWrapper {
-  position: relative;
-}
-
-.cartCount {
-  position: absolute;
-  top: -1rem;
-  right: -1rem;
-  background-color: #c11f1f; /* Darker red */
-  color: white;
-  font-size: 1.2rem;
-  border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cartIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.searchContainer {
-  display: flex;
-  align-items: center;
-  background-color: #f0f0f0;
-  margin: 1.6rem;
-  padding: 1rem;
-  border-radius: 0.8rem;
-}
-
-.searchIcon {
-  color: var(--grey-3);
-  margin-right: 1rem;
-}
-
-.searchText {
-  color: var(--grey-3);
-  font-size: var(--subtext);
-}
-
-.cameraPreview {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  background-color: #000;
-}
-
-.videoStream {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.scannerFrame {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  height: 50%;
-  pointer-events: none;
-}
-
-.scannerCorner {
-  position: absolute;
-  width: 2rem;
-  height: 2rem;
-  border-color: white;
-  border-style: solid;
-  border-width: 0;
-}
-
-.topLeft {
-  top: 0;
-  left: 0;
-  border-top-width: 3px;
-  border-left-width: 3px;
-  border-top-left-radius: 0.5rem;
-}
-
-.topRight {
-  top: 0;
-  right: 0;
-  border-top-width: 3px;
-  border-right-width: 3px;
-  border-top-right-radius: 0.5rem;
-}
-
-.bottomLeft {
-  bottom: 0;
-  left: 0;
-  border-bottom-width: 3px;
-  border-left-width: 3px;
-  border-bottom-left-radius: 0.5rem;
-}
-
-.bottomRight {
-  bottom: 0;
-  right: 0;
-  border-bottom-width: 3px;
-  border-right-width: 3px;
-  border-bottom-right-radius: 0.5rem;
-}
-
-.withOverlay {
-  background-image: url("/api/placeholder/400/320");
-  background-size: cover;
-  background-position: center;
-}
-
-.foundOverlay {
-  position: absolute;
-  bottom: 1.6rem;
-  left: 1.6rem;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 0.8rem 1.2rem;
-  border-radius: 0.4rem;
-  font-size: var(--subtext);
-}
-
-.foundText {
-  color: white;
-}
-
-.productDetails {
-  display: flex;
-  padding: 1.6rem;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
-  margin: 20px;
-  position: relative;
-  z-index: 1;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.productImage {
-  width: 8rem;
-  height: 8rem;
-  border-radius: 0.4rem;
-  border: 1px solid #eee;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.productImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.productInfo {
-  flex-grow: 1;
-  margin-left: 1.6rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.productName {
-  font-size: var(--header-five);
-  color: var(--text-title);
-  margin: 0 0 0.8rem 0;
-}
-
-.productDescription {
-  font-size: var(--subtext);
-  color: var(--grey-3);
-  font-weight: normal;
-}
-
-.productStatus {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.inStock {
-  color: var(--secondary-color);
-  font-size: var(--subtext);
-}
-
-.productPrice {
-  font-size: var(--header-four);
-  color: var(--primary-color);
-  font-weight: bold;
-}
-
-.actionBar {
-  display: flex;
-  padding: 1.6rem;
-  gap: 1.6rem;
-  margin-top: 1.6rem;
-}
-
-.quantityControls {
-  display: flex;
-  align-items: center;
-  background-color: #f0f0f0;
-  border-radius: 0.4rem;
-  overflow: hidden;
-}
-
-.quantityBtn {
-  background-color: #e0e0e0;
-  border: none;
-  width: 4rem;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.quantityValue {
-  width: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--body-text);
-}
-
-.addToCart {
-  flex-grow: 1;
-  background-color: var(--secondary-color);
-  color: white;
-  border: none;
-  border-radius: 0.4rem;
-  font-size: var(--subtext);
-  font-weight: 500;
-  cursor: pointer;
-}
-
-/* Confirmed View Styles */
+/* Confirmed view styles */
 .mainContainer {
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  padding: 1.6rem;
-  background-color: var(--background-color);
-  justify-content: end;
-}
-
-.confirmationMessage {
-  height: 80vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.buttons {
-  height: 20vh;
-  width: 100%;
-}
-
-.text {
-  color: var(--primary-color);
-  opacity: 0.5;
-}
-
-.Scan {
-  margin: 70% 0;
-  text-align: center;
+  flex: 1;
+  gap: 2rem;
 }
 
 .walletSection {
-  background-color: #fff2f2; /* Light pink */
-  border-radius: 1.2rem;
-  padding: 1.6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3.2rem;
+  background-color: var(--foreground-color);
+  padding: 1.5rem;
+  border-radius: 1.2rem;
+  margin-bottom: 2rem;
 }
 
 .balanceContainer {
@@ -334,175 +34,79 @@
 }
 
 .balanceText {
-  font-size: var(--header-three);
-  color: var(--text-title);
-  margin: 0 0 0.8rem 0;
-}
-
-.balanceBtn {
-  background-color: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  color: var(--primary-color);
-  font-size: var(--subtext);
-  padding: 0;
-  cursor: pointer;
-}
-
-.balanceIcon {
-  margin-right: 0.4rem;
-  color: var(--secondary-color);
-}
-
-.fundWalletBtn {
-  background-color: var(--secondary-color);
-  color: white;
-  border: none;
-  border-radius: 0.4rem;
-  padding: 1rem 1.6rem;
-  display: flex;
-  align-items: center;
-  font-size: var(--subtext);
-  cursor: pointer;
-}
-
-.fundWalletBtn span {
-  margin-left: 0.4rem;
-}
-
-.scanFrame {
-  flex: 1;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.frameCorner {
-  position: absolute;
-  width: 5rem;
-  height: 5rem;
-  border-color: var(--primary-color);
-  border-style: solid;
-  border-width: 0;
-}
-
-.scanInfo {
-  background-color: rgba(240, 240, 240, 0.8);
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  border-radius: 0.8rem;
-  font-size: var(--subtext);
-  color: var(--text-body);
-}
-
-.infoIcon {
-  color: var(--secondary-color);
-  margin-right: 0.8rem;
-}
-
-.cartTotal {
-  background-color: #1a1a1a;
-  color: white;
-  padding: 1rem 1.6rem;
-  border-radius: 0.4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.totalText {
-  font-size: var(--subtext);
-}
-
-.totalValue {
-  font-size: var(--subtext);
-  color: #e52929; /* Red for price */
-  font-weight: bold;
-}
-
-.startScanButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  width: 100%;
-  height: 4.8rem;
-  background-color: var(--secondary-color);
-  color: var(--background-color);
-  border: none;
-  border-radius: 0.8rem;
-  font-size: var(--button-text);
-  margin: 2rem 0;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.startScanButton:hover {
-  background-color: var(--success-1);
-}
-
-.scannedItemsList {
-  margin: 2rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.Scan {
-  margin: 70% 0;
-}
-
-.scannedItem {
-  display: grid;
-  grid-template-columns: 6rem 1fr auto;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1rem;
-  background-color: var(--foreground-color);
-  border-radius: 0.8rem;
-}
-
-.itemImage {
-  width: 6rem;
-  height: 6rem;
-  object-fit: cover;
-  border-radius: 0.4rem;
-}
-
-.itemDetails h3 {
-  font-size: var(--subtext);
+  font-size: var(--header-five);
   color: var(--text-title);
   margin-bottom: 0.5rem;
 }
 
-.itemDetails p {
+.balanceBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--secondary-color);
   font-size: var(--subtext);
-  color: var(--text-body);
+  cursor: pointer;
 }
 
-.itemTotal {
-  font-size: var(--body-text);
-  font-weight: bold;
+.balanceIcon {
   color: var(--secondary-color);
 }
 
-.cameraIconWrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
+.fundWalletBtn {
   display: flex;
   align-items: center;
+  gap: 0.8rem;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 0.8rem;
+  font-size: var(--button-text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fundWalletBtn:hover {
+  background-color: var(--primary-color);
+}
+
+.confirmationMessage {
+  flex: 1;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.cameraIconWrapper {
+  width: 100%;
+  max-width: 350px;
+  aspect-ratio: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cameraFrameIcon {
-  position: relative;
   width: 100%;
   height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--foreground-color);
+  border-radius: 1.2rem;
+}
+
+.Scan {
+  color: var(--primary-color);
+  font-size: var(--body-text);
+  text-align: center;
+  padding: 2rem;
+  max-width: 80%;
 }
 
 .cornerTopLeft,
@@ -510,155 +114,459 @@
 .cornerBottomLeft,
 .cornerBottomRight {
   position: absolute;
-  width: 60px;
-  height: 100px;
-  border: 2px solid currentColor;
+  width: 2rem;
+  height: 2rem;
+  border-color: var(--secondary-color);
+  border-style: solid;
 }
 
 .cornerTopLeft {
-  top: 0;
-  left: 0;
-  border-right: 0;
-  border-bottom: 0;
-  border-top-left-radius: 30px;
+  top: 2rem;
+  left: 2rem;
+  border-width: 0.3rem 0 0 0.3rem;
+  border-top-left-radius: 0.5rem;
 }
 
 .cornerTopRight {
-  top: 0;
-  right: 0;
-  border-left: 0;
-  border-bottom: 0;
-  border-top-right-radius: 30px;
+  top: 2rem;
+  right: 2rem;
+  border-width: 0.3rem 0.3rem 0 0;
+  border-top-right-radius: 0.5rem;
 }
 
 .cornerBottomLeft {
-  bottom: 0;
-  left: 0;
-  border-right: 0;
-  border-top: 0;
-  border-bottom-left-radius: 30px;
+  bottom: 2rem;
+  left: 2rem;
+  border-width: 0 0 0.3rem 0.3rem;
+  border-bottom-left-radius: 0.5rem;
 }
 
 .cornerBottomRight {
-  bottom: 0;
-  right: 0;
-  border-left: 0;
-  border-top: 0;
-  border-bottom-right-radius: 30px;
+  bottom: 2rem;
+  right: 2rem;
+  border-width: 0 0.3rem 0.3rem 0;
+  border-bottom-right-radius: 0.5rem;
 }
 
-.scanningIndicator {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #fff;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.scanLine {
+.startScanButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  font-size: var(--button-text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
   width: 100%;
-  height: 2px;
-  background: #00ff00;
-  animation: scan 2s linear infinite;
-  box-shadow: 0 0 8px rgba(0, 255, 0, 0.5);
 }
 
-.capturedImage {
+.startScanButton:hover {
+  background-color: var(--primary-color);
+}
+
+.cartTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--foreground-color);
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  margin-top: 1rem;
+}
+
+.totalText {
+  font-size: var(--subtext);
+  color: var(--text-body);
+}
+
+.totalValue {
+  font-size: var(--header-six);
+  color: var(--text-title);
+  font-weight: 600;
+}
+
+/* Scanning view styles */
+.scanContainer {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+}
+
+.header {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  right: 0;
+  padding: 2rem;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
 }
 
-@keyframes scan {
-  0% {
-    transform: translateY(-100px);
-  }
-  100% {
-    transform: translateY(100px);
-  }
+.closeButton {
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Found view styles */
+.foundContainer {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: var(--primary-color);
 }
 
 .backgroundImage {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
-  filter: blur(4px);
-  opacity: 0.3;
+  position: relative;
 }
 
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-  .productDetails {
-    flex-direction: column;
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  color: white;
+}
+
+.loadingOverlay p {
+  color: white;
+  font-size: var(--body-text);
+}
+
+.loadingSpinner {
+  width: 4rem;
+  height: 4rem;
+  border: 0.4rem solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--secondary-color);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.productDetails {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 2rem 2rem 0 0;
+  padding: 2rem;
+  animation: slideUp 0.5s ease;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.productImage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+}
+
+.productImage img {
+  width: 15rem;
+  height: 15rem;
+  object-fit: contain;
+  border-radius: 1rem;
+}
+
+.productInfo {
+  margin-bottom: 2rem;
+}
+
+.productName {
+  font-size: var(--header-five);
+  color: var(--text-title);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.productDescription {
+  font-size: var(--body-text);
+  color: var(--grey-3);
+  font-weight: normal;
+  margin-top: 0.5rem;
+}
+
+.productStatus {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.inStock {
+  color: var(--success-1);
+  font-size: var(--subtext);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.productPrice {
+  font-size: var(--header-six);
+  color: var(--text-title);
+  font-weight: 600;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  justify-content: center;
+}
+
+.quantityButton {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  border: 0.2rem solid var(--secondary-color);
+  background-color: white;
+  color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quantityButton:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.quantity {
+  font-size: var(--header-five);
+  color: var(--text-title);
+  font-weight: 600;
+}
+
+.addToCartButton {
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.8rem;
+  font-size: var(--button-text);
+  font-weight: 500;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.addToCartButton:hover {
+  background-color: var(--primary-color);
+}
+
+/* Scanned Items List */
+.scannedItemsList {
+  margin: 2rem 0;
+  background-color: var(--foreground-color);
+  border-radius: 1.2rem;
+  padding: 1.5rem;
+}
+
+.scannedItemsList h3 {
+  font-size: var(--header-six);
+  color: var(--text-title);
+  margin-bottom: 1.5rem;
+}
+
+.scannedItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 0.1rem solid var(--grey-6);
+}
+
+.scannedItem:last-child {
+  border-bottom: none;
+}
+
+.itemImage {
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+  border-radius: 0.8rem;
+}
+
+.itemDetails {
+  flex: 1;
+}
+
+.itemDetails h4 {
+  font-size: var(--subtext);
+  color: var(--text-title);
+  margin-bottom: 0.5rem;
+}
+
+.itemDetails p {
+  font-size: var(--subtext-mobile);
+  color: var(--grey-3);
+  line-height: 1.5;
+}
+
+.itemTotal {
+  font-size: var(--subtext);
+  color: var(--text-title);
+  font-weight: 600;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .Scan {
+    font-size: var(--body-text-mobile);
   }
 
-  .productImage {
-    width: 6rem;
-    height: 6rem;
-    margin-bottom: 1rem;
-  }
-
-  .productInfo {
-    margin-left: 0;
-  }
-
-  .actionBar {
-    flex-direction: column;
-  }
-
-  .quantityControls {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .addToCart {
-    width: 100%;
-    padding: 1.2rem 0;
-  }
-
-  .headerTitle {
-    font-size: var(--header-five-mobile);
+  .startScanButton {
+    font-size: var(--button-text-mobile);
+    padding: 1.2rem;
   }
 
   .productName {
     font-size: var(--header-five-mobile);
   }
 
-  .balanceText {
-    font-size: var(--header-three-mobile);
+  .productDescription {
+    font-size: var(--body-text-mobile);
   }
 
-  .scannedItem {
-    grid-template-columns: 5rem 1fr auto;
-    gap: 1rem;
+  .productPrice {
+    font-size: var(--header-six-mobile);
   }
 
+  .quantity {
+    font-size: var(--header-five-mobile);
+  }
+
+  .addToCartButton {
+    font-size: var(--button-text-mobile);
+    padding: 1.2rem;
+  }
+
+  .totalText {
+    font-size: var(--subtext-mobile);
+  }
+
+  .totalValue {
+    font-size: var(--button-text-mobile);
+  }
+
+  .quantityControls {
+    gap: 1.5rem;
+  }
+
+  .quantityButton {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .cameraIconWrapper {
+    max-width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContainer {
+    padding: 1.5rem;
+  }
+
+  .cornerTopLeft,
+  .cornerTopRight,
+  .cornerBottomLeft,
+  .cornerBottomRight {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .cornerTopLeft {
+    top: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .cornerTopRight {
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .cornerBottomLeft {
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+
+  .cornerBottomRight {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+
+  .cameraIconWrapper {
+    max-width: 250px;
+  }
+  
+  .scannedItemsList {
+    padding: 1rem;
+  }
+  
   .itemImage {
     width: 5rem;
     height: 5rem;
-  }
-
-  .itemDetails h3 {
-    font-size: var(--subtext-mobile);
-  }
-
-  .itemDetails p {
-    font-size: var(--subtext-mobile);
-  }
-
-  .itemTotal {
-    font-size: var(--subtext);
-  }
-  .Scan {
-    font-size: 1.4rem;
   }
 }

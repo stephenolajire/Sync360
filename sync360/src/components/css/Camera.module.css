@@ -1,10 +1,13 @@
-/* Camera.module.css */
 .cameraContainer {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: #000;
+  background-color: #000;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .video {
@@ -14,52 +17,43 @@
 }
 
 .error {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 20px;
+  color: #fff;
+  background-color: rgba(220, 38, 38, 0.8);
+  padding: 2rem;
   border-radius: 8px;
+  text-align: center;
+  max-width: 80%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .error p {
-  margin-bottom: 2rem;
-  color: var(--error-1);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
-.error button {
-  margin-top: 1rem;
-  padding: 1rem 2rem;
-  background-color: var(--secondary-color);
-  color: white;
+.retryButton {
+  background-color: #fff;
+  color: #dc2626;
   border: none;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: var(--subtext);
-}
-
-.closeButton {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 8px 16px;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
+  padding: 0.75rem 1.5rem;
   border-radius: 4px;
+  font-weight: 600;
   cursor: pointer;
-  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.retryButton:hover {
+  background-color: #f3f4f6;
+  transform: translateY(-1px);
 }
 
 .scanOverlay {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,97 +64,112 @@
 .scanFrame {
   position: relative;
   width: 80%;
-  height: 200px;
+  max-width: 300px;
+  aspect-ratio: 1/1;
   border: 2px solid rgba(255, 255, 255, 0.5);
-  border-radius: 10px;
+  border-radius: 16px;
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+}
+
+.scanFrame.scanning {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.6), 0 0 20px rgba(34, 197, 94, 0.5);
 }
 
 .scanCorner {
   position: absolute;
   width: 20px;
   height: 20px;
-  border: 2px solid #00ff00;
+  border-width: 4px;
+  border-color: #3b82f6;
 }
 
-.scanCorner:nth-child(1) {
-  top: -2px;
-  left: -2px;
-  border-right: none;
-  border-bottom: none;
+.topLeft {
+  top: -4px;
+  left: -4px;
+  border-top-style: solid;
+  border-left-style: solid;
+  border-top-left-radius: 8px;
 }
 
-.scanCorner:nth-child(2) {
-  top: -2px;
-  right: -2px;
-  border-left: none;
-  border-bottom: none;
+.topRight {
+  top: -4px;
+  right: -4px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-top-right-radius: 8px;
 }
 
-.scanCorner:nth-child(3) {
-  bottom: -2px;
-  left: -2px;
-  border-right: none;
-  border-top: none;
+.bottomLeft {
+  bottom: -4px;
+  left: -4px;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-bottom-left-radius: 8px;
 }
 
-.scanCorner:nth-child(4) {
-  bottom: -2px;
-  right: -2px;
-  border-left: none;
-  border-top: none;
+.bottomRight {
+  bottom: -4px;
+  right: -4px;
+  border-bottom-style: solid;
+  border-right-style: solid;
+  border-bottom-right-radius: 8px;
 }
 
 .scanLine {
+  position: absolute;
   width: 80%;
+  max-width: 300px;
   height: 2px;
-  background: #00ff00;
-  animation: scan 2s linear infinite;
-}
-
-.scanText {
-  color: white;
-  margin-top: 20px;
-  text-align: center;
-  font-size: 14px;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(90deg, rgba(59, 130, 246, 0), #3b82f6, rgba(59, 130, 246, 0));
+  animation: scanAnimation 2s infinite ease-in-out;
 }
 
 @keyframes scanAnimation {
   0% {
-    top: 0;
+    transform: translateY(-100px);
+    opacity: 0;
   }
-  50% {
-    top: 100%;
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
   }
   100% {
-    top: 0;
+    transform: translateY(100px);
+    opacity: 0;
   }
 }
 
-@keyframes scan {
-  0% {
-    transform: translateY(-50px);
-  }
-  100% {
-    transform: translateY(50px);
-  }
+.scanText {
+  position: absolute;
+  bottom: 20%;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Media Queries */
-@media screen and (max-width: 768px) {
-  .closeButton {
-    top: 1.5rem;
-    right: 1.5rem;
-    padding: 0.8rem 1.5rem;
-    font-size: var(--subtext-mobile);
-  }
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
 
-  .error p {
-    font-size: var(--body-text-mobile);
-  }
-
-  .error button {
-    font-size: var(--subtext-mobile);
-    padding: 0.8rem 1.5rem;
-  }
+.closeButton:hover {
+  background-color: rgba(0, 0, 0, 0.8);
 }
