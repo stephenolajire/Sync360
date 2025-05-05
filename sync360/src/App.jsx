@@ -9,6 +9,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import ShippingDetails from "./pages/ShippingDetails";
 import PaymentReceipt from "./pages/PaymentReceipt";
+import { GlobalProvider } from "./context/GlobalContext";
 
 function App() {
   const [showModal, setShowModal] = useState(true);
@@ -50,25 +51,27 @@ function App() {
 
       {/* Only render the app content after mode selection */}
       {showContent && (
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              {/* Different routes based on shopping mode */}
-              {shoppingMode === "in-store" ? (
-                <Route index element={<BarcodeScannerPage />} />
-              ) : (
-                <Route index element={<ProductPage />} />
-              )}
-              <Route path="products" element={<ProductPage />} />
-              <Route path="scan" element={<BarcodeScannerPage />} />
-              <Route path="product/:id" element={<ProductDetail />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/shipping-details" element={<ShippingDetails />} />
-              <Route path="/receipt" element={<PaymentReceipt />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <GlobalProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                {/* Different routes based on shopping mode */}
+                {shoppingMode === "in-store" ? (
+                  <Route index element={<BarcodeScannerPage />} />
+                ) : (
+                  <Route index element={<ProductPage />} />
+                )}
+                <Route path="products" element={<ProductPage />} />
+                <Route path="scan" element={<BarcodeScannerPage />} />
+                <Route path="product/:id" element={<ProductDetail />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/shipping-details" element={<ShippingDetails />} />
+                <Route path="/receipt" element={<PaymentReceipt />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </GlobalProvider>
       )}
     </>
   );

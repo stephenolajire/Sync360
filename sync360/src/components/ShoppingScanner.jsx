@@ -7,13 +7,25 @@ import {
   Plus,
   Minus,
   Info,
+  ShoppingCart, // Add this
+  ArrowLeft, // Add this
 } from "lucide-react";
+import { useNavigate } from "react-router-dom"; // Add this
 import styles from "./css/ShoppingScanner.module.css";
 import Camera from "./Camera";
 import Swal from "sweetalert2";
+import { useGlobal } from "../context/GlobalContext";
 
 const ShoppingScanner = () => {
-  const [scanMode, setScanMode] = useState("confirmed");
+  const navigate = useNavigate(); // Add this
+  const {
+    scanMode,
+    setScanMode,
+    handleStartScanning,
+    scanStartTime,
+    setScanStartTime,
+  } = useGlobal();
+  // const [scanMode, setScanMode] = useState("confirmed");
   const [scannedItems, setScannedItems] = useState([]);
   const [productDetails, setProductDetails] = useState({
     name: "Coca Cola",
@@ -28,7 +40,7 @@ const ShoppingScanner = () => {
   const [cartTotal, setCartTotal] = useState(24500);
   const [capturedImage, setCapturedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [scanStartTime, setScanStartTime] = useState(null);
+  // const [scanStartTime, setScanStartTime] = useState(null);
 
   // This effect handles the scanning timer
   useEffect(() => {
@@ -51,7 +63,7 @@ const ShoppingScanner = () => {
           console.log("Loading complete, showing product details");
           setIsLoading(false);
         }, 2000);
-      }, 3000);
+      }, 5000);
     }
 
     // Clean up the timer if component unmounts or mode changes
@@ -110,11 +122,11 @@ const ShoppingScanner = () => {
     setScanMode("scanning");
   };
 
-  const handleStartScanning = () => {
-    // Set scanning mode when the user clicks the scan button
-    setScanMode("scanning");
-    setScanStartTime(Date.now()); // Record when scanning started
-  };
+  // const handleStartScanning = () => {
+  //   // Set scanning mode when the user clicks the scan button
+  //   setScanMode("scanning");
+  //   setScanStartTime(Date.now()); // Record when scanning started
+  // };
 
   const handleClose = () => {
     // Reset to the initial state
@@ -149,6 +161,28 @@ const ShoppingScanner = () => {
           <X size={24} />
         </button>
       </div>
+      <div className={styles.topNav}>
+        <button className={styles.backButton} onClick={() => navigate(-1)}>
+          <ArrowLeft size={24} />
+        </button>
+
+        <div className={styles.searchContainer}>
+          <Search size={20} />
+          <input
+            type="text"
+            placeholder="Search items..."
+            onClick={() => navigate("/products")}
+            readOnly
+          />
+        </div>
+
+        <button className={styles.cartButton} onClick={() => navigate("/cart")}>
+          <ShoppingCart size={24} />
+          {scannedItems.length > 0 && (
+            <span className={styles.cartBadge}>{scannedItems.length}</span>
+          )}
+        </button>
+      </div>
       <Camera
         onScan={() => {}}
         onError={() => {}}
@@ -165,6 +199,32 @@ const ShoppingScanner = () => {
           className={styles.backgroundImage}
           style={{ backgroundImage: `url(${capturedImage})` }}
         >
+          <div className={styles.topNav}>
+            <button className={styles.backButton} onClick={() => navigate(-1)}>
+              <ArrowLeft size={24} />
+            </button>
+
+            <div className={styles.searchContainer}>
+              <Search size={20} />
+              <input
+                type="text"
+                placeholder="Search items..."
+                onClick={() => navigate("/products")}
+                readOnly
+              />
+            </div>
+
+            <button
+              className={styles.cartButton}
+              onClick={() => navigate("/cart")}
+            >
+              <ShoppingCart size={24} />
+              {scannedItems.length > 0 && (
+                <span className={styles.cartBadge}>{scannedItems.length}</span>
+              )}
+            </button>
+          </div>
+
           {isLoading ? (
             <div className={styles.loadingOverlay}>
               <div className={styles.loadingSpinner}></div>
@@ -246,7 +306,7 @@ const ShoppingScanner = () => {
       </div>
 
       {/* Show scanned items if any */}
-      {scannedItems.length > 0 && (
+      {/* {scannedItems.length > 0 && (
         <div className={styles.scannedItemsList}>
           <h3>Items in Cart</h3>
           {scannedItems.map((item) => (
@@ -268,7 +328,7 @@ const ShoppingScanner = () => {
             </div>
           ))}
         </div>
-      )}
+      )} */}
 
       {/* Add Scan Button */}
       <div className={styles.buttons}>

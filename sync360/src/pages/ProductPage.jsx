@@ -5,12 +5,14 @@ import {
   MdRemove,
   MdSearch,
   MdOutlineStore,
+  MdQrCodeScanner, // Add this import
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import styles from "./css/ProductPage.module.css";
 import { sampleProducts } from "../data/sampledata";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useGlobal } from "../context/GlobalContext";
 
 const shopData = {
   name: "Urban Trends",
@@ -21,6 +23,9 @@ const shopData = {
 };
 
 const ProductPage = () => {
+  const shoppingMode = localStorage.getItem('shoppingMode')
+  // console.log(shoppingMode)
+  const {handleStartScanning} = useGlobal()
   const navigate = useNavigate();
   const [products, setProducts] = useState(sampleProducts);
   const [cart, setCart] = useState([]);
@@ -116,6 +121,12 @@ const ProductPage = () => {
     const product = products.find((p) => p.id === productId);
     navigate(`/product/${productId}`, { state: { product } });
   };
+
+  const startScanning = () => {
+    if (shoppingMode === "in-store") {
+      navigate('/')
+    }
+  }
   return (
     <div className={styles.container}>
       {/* Shop Header */}
@@ -146,15 +157,25 @@ const ProductPage = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className={styles.cartButton}>
-          <Link to="/cart">
-            <MdShoppingCart />
-            {cart.length > 0 && (
-              <span className={styles.cartBadge}>
-                {cart.reduce((total, item) => total + item.quantity, 0)}
-              </span>
-            )}
-          </Link>
+        <div className={styles.actionButtons}>
+          {shoppingMode === "in-store" && (
+            <button
+              className={styles.scanButton}
+              onClick={startScanning}
+            >
+              <MdQrCodeScanner />
+            </button>
+          )}
+          <div className={styles.cartButton}>
+            <Link to="/cart">
+              <MdShoppingCart />
+              {cart.length > 0 && (
+                <span className={styles.cartBadge}>
+                  {cart.reduce((total, item) => total + item.quantity, 0)}
+                </span>
+              )}
+            </Link>
+          </div>
         </div>
       </div>
 
