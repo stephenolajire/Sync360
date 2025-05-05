@@ -107,7 +107,7 @@ const ShoppingScanner = () => {
     });
 
     // Reset to confirmed view
-    setScanMode("confirmed");
+    setScanMode("scanning");
   };
 
   const handleStartScanning = () => {
